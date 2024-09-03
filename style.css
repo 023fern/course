@@ -1,0 +1,118 @@
+/* เพิ่มการตกแต่งให้กับ #app */
+#app {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 30px;
+  background: linear-gradient(to right, #f0f4f8, #d9e2ec);
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* การตกแต่งฟอร์ม */
+form {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 25px;
+}
+
+/* ป้ายชื่อ */
+label {
+  display: block;
+  margin-top: 12px;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+/* ช่องกรอกข้อมูล */
+input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  outline: none;
+}
+
+/* ปุ่ม */
+button {
+  margin-top: 15px;
+  padding: 12px 20px;
+  background: linear-gradient(to right, #007bff, #0056b3);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background: linear-gradient(to right, #0056b3, #007bff);
+  transform: scale(1.05);
+}
+
+button:focus {
+  outline: none;
+}
+
+/* ตาราง */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 25px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  color: #555;
+}
+
+th {
+  background: #007bff;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+td {
+  background: #f9f9f9;
+  border-bottom: 1px solid #eee;
+}
+
+tr:nth-child(even) td {
+  background: #f4f4f4;
+}
+
+tr:hover td {
+  background: #e9ecef;
+}
+
+/* เพิ่มความยืดหยุ่นให้กับตาราง */
+th,
+td {
+  text-align: center;
+}
+
+/* เพิ่มขนาดให้กับตารางเมื่อเลื่อนเมาส์ */
+table tr:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}

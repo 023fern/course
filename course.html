@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+  
+<div id="app">
+  <h1>จัดการหลักสูตร In-house Training</h1>
+  
+  <!-- ฟอร์มสำหรับเพิ่มหรือแก้ไขหลักสูตร -->
+  <form @submit.prevent="submitForm">
+    <label for="courseName">ชื่อหลักสูตร:</label>
+    <input type="text" id="courseName" v-model="course.name" required>
+    
+    <label for="courseCategory">หมวดหลักสูตร:</label>
+    <input type="text" id="courseCategory" v-model="course.category" required>
+    
+    <label for="courseInstructor">วิทยากร:</label>
+    <input type="text" id="courseInstructor" v-model="course.instructor" required>
+    
+    <label for="courseDays">จำนวนวัน:</label>
+    <input type="number" id="courseDays" v-model="course.days" required>
+
+<label for="courseImage">รูปภาพหลักสูตร:</label>
+  <input type="file" id="courseImage" @change="handleFileUpload">
+    
+    <button type="submit">{{ editIndex === -1 ? 'เพิ่มหลักสูตร' : 'อัปเดตหลักสูตร' }}</button>
+  </form>
+  
+  <!-- ตารางแสดงรายการหลักสูตร -->
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>ชื่อหลักสูตร</th>
+        <th>หมวดหลักสูตร</th>
+        <th>วิทยากร</th>
+        <th>จำนวนวัน</th>
+         <th>รูปภาพ</th>
+        <th>การกระทำ</th>     
+      
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="(course, index) in courses" :key="index">
+        <td>{{ index + 1 }}</td>
+        <td>{{ course.name }}</td>
+        <td>{{ course.category }}</td>
+        <td>{{ course.instructor }}</td>
+        <td>{{ course.days }} วัน</td>
+        <td> <img v-if="course.image" :src="course.image" alt="Course Image" style="width: 100px; height: auto;"></td>
+     
+        <td>
+          <button @click="editCourse(index)">แก้ไข</button>
+          <button @click="deleteCourse(index)">ลบ</button>
+        </td>
+      </tr>
+ </tbody>
+  </table>
+</div>
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    courses: [], // เก็บข้อมูลหลักสูตรทั้งหมด
+    course: {
+      name: '',
+      category: '',
+      instructor: '',
+      days: '',
+      image: ''
+  
+    },
+    editIndex: -1 // เก็บดัชนีของหลักสูตรที่กำลังแก้ไข
+  },
+  methods: {
+    submitForm() {
+      if (this.editIndex === -1) {
+        // เพิ่มหลักสูตรใหม่
+        this.courses.push({ ...this.course });
+      } else {
+        // อัปเดตหลักสูตรที่เลือก
+        Vue.set(this.courses, this.editIndex, { ...this.course });
+      }
+      this.resetForm();
+    },
+    editCourse(index) {
+      // เตรียมข้อมูลสำหรับแก้ไข
+      this.course = { ...this.courses[index] };
+      this.editIndex = index;
+    },
+    deleteCourse(index) {
+      // ลบหลักสูตร
+      this.courses.splice(index, 1);
+    },
+    resetForm() {
+      // รีเซ็ตฟอร์ม
+      this.course = {
+        name: '',
+        category: '',
+instructor: '',
+         days: '',
+        image: ''
+      };
+      this.editIndex = -1;
+    },
+    handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.course.image = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  }
+});
+</script>
+    
+</body>
+</html>
